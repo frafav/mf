@@ -6,277 +6,54 @@
   <meta name="theme-color" content="#f2f0e9" />
   <title>80% fatto è meglio di 100% immaginato.</title>
   <style>
-    :root{
-      --bg:#f2f0e9;
-      --text:#111111;
-      --muted:#6b6b67;
-      --accent:#ff6b2c;
-      --card:rgba(255,255,255,.72);
-      --line:rgba(17,17,17,.10);
-      --shadow:0 20px 60px rgba(20,20,20,.08);
-    }
-
-    *{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%;background:var(--bg)}
-    html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden}
-
-    body{
-      min-height:100svh;
-      color:var(--text);
-      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:
-        radial-gradient(circle at 78% 8%, rgba(255,107,44,.11), transparent 30rem),
-        radial-gradient(circle at 10% 90%, rgba(17,17,17,.05), transparent 24rem),
-        var(--bg);
-      padding:
-        max(12px, env(safe-area-inset-top))
-        max(12px, env(safe-area-inset-right))
-        max(12px, env(safe-area-inset-bottom))
-        max(12px, env(safe-area-inset-left));
-    }
-
-    .shell{
-      width:min(1500px,100%);
-      min-height:calc(100svh - 24px);
-      margin:0 auto;
-      display:grid;
-      grid-template-rows:auto 1fr auto;
-      border:1px solid var(--line);
-      border-radius:30px;
-      background:rgba(255,255,255,.32);
-      -webkit-backdrop-filter:blur(12px);
-      backdrop-filter:blur(12px);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    header,footer{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:22px 26px;
-      min-width:0;
-    }
-
-    .brand{
-      font-size:12px;
-      line-height:1;
-      letter-spacing:.18em;
-      text-transform:none;
-      color:var(--text);
-      font-weight:800;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      flex:0 0 auto;
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:10px 14px;
-      background:rgba(255,255,255,.55);
-    }
-
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--accent);
-      box-shadow:0 0 0 5px rgba(255,107,44,.12);
-    }
-
-    main{
-      min-width:0;
-      padding-top:72px;
-      display:grid;
-      grid-template-columns:minmax(0,1fr) minmax(250px,300px);
-      gap:30px;
-      align-items:end;
-      padding:30px 26px 28px;
-    }
-
-    .statement{
-      min-width:0;
-      margin:0;
-      max-width:1080px;
-      font-size:clamp(3.7rem,9.5vw,9.5rem);
-      line-height:.86;
-      letter-spacing:-.064em;
-      font-weight:850;
-      text-wrap:balance;
-      overflow-wrap:normal;
-      word-break:normal;
-    }
-
-    .editable{color:var(--accent);white-space:nowrap}
-
-    .panel{
-      min-width:0;
-      align-self:end;
-      padding:20px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:var(--card);
-      box-shadow:0 14px 40px rgba(0,0,0,.05);
-    }
-
-    .panel label{
-      display:block;
-      margin-bottom:10px;
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-    }
-
-    .control-row{display:flex;align-items:center;gap:10px;min-width:0}
-
-    input[type="number"]{
-      width:104px;
-      max-width:100%;
-      border:none;
-      outline:none;
-      padding:13px;
-      border-radius:15px;
-      background:#111;
-      color:#fff;
-      font:inherit;
-      font-size:27px;
-      font-weight:800;
-      appearance:textfield;
-    }
-
-    input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-    .percent-mark{font-size:27px;font-weight:800}
-    .range-wrap{margin-top:16px}
-    input[type="range"]{width:100%;max-width:100%;accent-color:var(--accent);cursor:pointer}
-    .hint{margin-top:12px;font-size:12px;line-height:1.45;color:var(--muted)}
-
-    footer{
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:12px;
-    }
-    .signature{font-weight:700;color:var(--text)}
-
-    @media (max-width:900px){
-      .shell{border-radius:24px}
-      header,footer{padding:18px 18px}
-      main{
-        grid-template-columns:minmax(0,1fr);
-        padding-top:56px;
-        align-content:space-between;
-        align-items:start;
-        gap:28px;
-        padding:24px 18px 22px;
-      }
-      .statement{
-        max-width:100%;
-        font-size:clamp(3.2rem,14vw,6.8rem);
-        line-height:.88;
-        letter-spacing:-.06em;
-      }
-      .panel{width:100%;max-width:420px}
-    }
-
-    @media (max-width:480px){
-      body{
-        padding:
-          max(8px,env(safe-area-inset-top))
-          max(8px,env(safe-area-inset-right))
-          max(8px,env(safe-area-inset-bottom))
-          max(8px,env(safe-area-inset-left));
-      }
-      .shell{
-        min-height:calc(100svh - 16px);
-        border-radius:20px;
-      }
-      header{
-        padding:15px 14px 10px;
-      }
-      .badge{padding:8px 10px;font-size:10px}
-      .brand{font-size:14px;letter-spacing:-.01em}
-      main{
-        gap:22px;
-        padding:16px 14px 18px;
-      }
-      .statement{
-        font-size:clamp(2.85rem,13.2vw,4.25rem);
-        line-height:.9;
-        letter-spacing:-.057em;
-        text-wrap:pretty;
-      }
-      .panel{
-        padding:16px;
-        border-radius:18px;
-      }
-      input[type="number"]{
-        width:92px;
-        font-size:24px;
-        padding:11px 12px;
-      }
-      .percent-mark{font-size:24px}
-      footer{display:none;}
-    }
-
-    @media (max-width:380px){
-      .statement{font-size:clamp(2.55rem,12.8vw,3.45rem)}
-      .badge{display:none}
-      footer span:first-child{display:none}
-    }
+    :root{--bg:#f2f0e9;--text:#111111;--muted:#6b6b67;--accent:#ff6b2c;--card:rgba(255,255,255,.72);--line:rgba(17,17,17,.10);--shadow:0 20px 60px rgba(20,20,20,.08)}
+    *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:var(--bg)}html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden}
+    body{min-height:100svh;color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 78% 8%,rgba(255,107,44,.11),transparent 30rem),radial-gradient(circle at 10% 90%,rgba(17,17,17,.05),transparent 24rem),var(--bg);padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+    .shell{width:min(1500px,100%);min-height:calc(100svh - 24px);margin:0 auto;display:grid;grid-template-rows:auto 1fr;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.32);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--shadow);overflow:hidden}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 26px;min-width:0}.brand{font-size:14px;line-height:1;letter-spacing:.02em;color:var(--text);font-weight:800}.badge{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.55)}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(255,107,44,.12)}
+    main{min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,430px);gap:34px;padding:52px 26px 26px;align-items:start}.left{min-width:0;display:grid;gap:28px}.statement{min-width:0;margin:0;max-width:980px;font-size:clamp(3.7rem,9vw,9rem);line-height:.86;letter-spacing:-.064em;font-weight:850;text-wrap:balance}.editable{color:var(--accent);white-space:nowrap}
+    .controls{display:grid;gap:16px;max-width:460px;padding:22px;border:1px solid var(--line);border-radius:24px;background:var(--card);box-shadow:0 14px 40px rgba(0,0,0,.05)}.controls label{display:block;color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}.control-row{display:flex;align-items:center;gap:10px;min-width:0}input[type="number"]{width:104px;max-width:100%;border:none;outline:none;padding:13px;border-radius:15px;background:#111;color:#fff;font:inherit;font-size:27px;font-weight:800;appearance:textfield}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.percent-mark{font-size:27px;font-weight:800}input[type="range"]{width:100%;max-width:100%;accent-color:var(--accent);cursor:pointer}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}button{appearance:none;border:none;cursor:pointer;border-radius:999px;padding:14px 18px;font:inherit;font-size:14px;font-weight:800;transition:transform .15s ease,opacity .15s ease,box-shadow .15s ease}button:hover{transform:translateY(-1px)}.primary{background:var(--text);color:#fff;box-shadow:0 10px 22px rgba(17,17,17,.14)}.secondary{background:rgba(255,255,255,.9);color:var(--text);border:1px solid var(--line)}.hint{margin:0;font-size:12px;line-height:1.45;color:var(--muted)}
+    .right{min-width:0;display:grid;gap:14px;align-self:start}.preview-label{margin:0;color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}.artboard{width:100%;aspect-ratio:1/1;border-radius:28px;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.10);border:1px solid rgba(17,17,17,.08);background:#f2f0e9;position:relative}.poster{position:absolute;inset:0;padding:8.5%;display:flex;flex-direction:column;background:radial-gradient(circle at 82% 12%,rgba(255,107,44,.11),transparent 34%),radial-gradient(circle at 15% 84%,rgba(17,17,17,.05),transparent 28%),#f2f0e9}.poster-brand{font-size:clamp(14px,2vw,18px);font-weight:800;letter-spacing:.01em;color:#111;margin-bottom:12%}.poster-text{margin:0;font-weight:850;font-size:clamp(2rem,6.8vw,4.45rem);line-height:.88;letter-spacing:-.06em;color:#111;text-wrap:balance}.poster-text .accent{color:#ff6b2c;white-space:nowrap}.poster-footer{margin-top:auto;color:#6b6b67;font-size:clamp(12px,1.5vw,14px);line-height:1.3}canvas{display:none}
+    @media(max-width:980px){main{grid-template-columns:minmax(0,1fr);padding-top:34px}.right{max-width:560px}.statement{font-size:clamp(3.1rem,14vw,6.8rem)}}
+    @media(max-width:480px){body{padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}.shell{min-height:calc(100svh - 16px);border-radius:20px}header{padding:16px 14px 10px}.badge{padding:8px 10px;font-size:10px}main{gap:24px;padding:22px 14px 18px}.statement{font-size:clamp(2.7rem,13vw,4.3rem);line-height:.9}.controls{padding:16px;border-radius:18px}input[type="number"]{width:92px;font-size:24px;padding:11px 12px}.percent-mark{font-size:24px}button{width:100%}}
+    @media(max-width:380px){.badge{display:none}.statement{font-size:clamp(2.45rem,12vw,3.5rem)}}
   </style>
 </head>
 <body>
   <section class="shell">
-    <header>
-      <div class="brand">The 6am Review</div>
-      <div class="badge"><span class="dot"></span> Personalizzabile</div>
-    </header>
-
+    <header><div class="brand">The 6am Review</div><div class="badge"><span class="dot"></span> Personalizzabile + download</div></header>
     <main>
-      <h1 class="statement">
-        <span class="editable"><span id="headlineValue">80</span>%</span>
-        fatto è meglio di 100% immaginato.
-      </h1>
-
-      <aside class="panel">
-        <label for="percentInput">Prima percentuale</label>
-        <div class="control-row">
-          <input id="percentInput" type="number" min="1" max="100" value="80" inputmode="numeric" />
-          <span class="percent-mark">%</span>
-        </div>
-        <div class="range-wrap">
+      <section class="left">
+        <h1 class="statement"><span class="editable"><span id="headlineValue">80</span>%</span> fatto è meglio di 100% immaginato.</h1>
+        <div class="controls">
+          <div><label for="percentInput">Prima percentuale</label></div>
+          <div class="control-row"><input id="percentInput" type="number" min="1" max="100" value="80" inputmode="numeric" /><span class="percent-mark">%</span></div>
           <input id="percentRange" type="range" min="1" max="100" value="80" />
+          <div class="actions"><button class="primary" id="downloadBtn">Scarica immagine quadrata</button><button class="secondary" id="resetBtn" type="button">Reset 80%</button></div>
+          <p class="hint">La frase si aggiorna in tempo reale. Il download genera un PNG quadrato con il logo <strong>The 6am Review</strong> visibile.</p>
         </div>
-        <div class="hint">Cambia il numero e la frase si aggiorna in tempo reale.</div>
+      </section>
+      <aside class="right">
+        <p class="preview-label">Anteprima immagine quadrata</p>
+        <div class="artboard">
+          <div class="poster" id="posterPreview">
+            <div class="poster-brand">The 6am Review</div>
+            <h2 class="poster-text"><span class="accent"><span id="posterValue">80</span>%</span> fatto è meglio di 100% immaginato.</h2>
+            <div class="poster-footer">www.the6amreview.com</div>
+          </div>
+        </div>
       </aside>
     </main>
-
-    <footer>
-      <span></span>
-    </footer>
   </section>
-
+  <canvas id="exportCanvas" width="1080" height="1080"></canvas>
   <script>
-    const input=document.getElementById('percentInput');
-    const range=document.getElementById('percentRange');
-    const headline=document.getElementById('headlineValue');
-
-    function update(value){
-      let v=Number(value);
-      if(Number.isNaN(v)) v=80;
-      v=Math.min(100,Math.max(1,v));
-      input.value=v;
-      range.value=v;
-      headline.textContent=v;
-      document.title=`${v}% fatto è meglio di 100% immaginato.`;
-    }
-
-    input.addEventListener('input',e=>update(e.target.value));
-    range.addEventListener('input',e=>update(e.target.value));
+    const input=document.getElementById('percentInput'),range=document.getElementById('percentRange'),headline=document.getElementById('headlineValue'),posterValue=document.getElementById('posterValue'),downloadBtn=document.getElementById('downloadBtn'),resetBtn=document.getElementById('resetBtn'),canvas=document.getElementById('exportCanvas'),ctx=canvas.getContext('2d');
+    function update(value){let v=Number(value);if(Number.isNaN(v))v=80;v=Math.min(100,Math.max(1,v));input.value=v;range.value=v;headline.textContent=v;posterValue.textContent=v;document.title=`${v}% fatto è meglio di 100% immaginato.`}
+    function drawBackground(){ctx.fillStyle='#f2f0e9';ctx.fillRect(0,0,1080,1080);const g1=ctx.createRadialGradient(860,120,0,860,120,320);g1.addColorStop(0,'rgba(255,107,44,0.11)');g1.addColorStop(1,'rgba(255,107,44,0)');ctx.fillStyle=g1;ctx.fillRect(0,0,1080,1080);const g2=ctx.createRadialGradient(180,900,0,180,900,280);g2.addColorStop(0,'rgba(17,17,17,0.05)');g2.addColorStop(1,'rgba(17,17,17,0)');ctx.fillStyle=g2;ctx.fillRect(0,0,1080,1080)}
+    function drawPoster(){drawBackground();const p=92;let y=120;ctx.textBaseline='top';ctx.fillStyle='#111';ctx.font='800 30px Inter, Arial, sans-serif';ctx.fillText('The 6am Review',p,y);y+=150;ctx.font='850 106px Inter, Arial, sans-serif';const pct=`${input.value}%`;ctx.fillStyle='#ff6b2c';ctx.fillText(pct,p,y);const pw=ctx.measureText(pct).width,tail=' fatto è meglio di',tw=ctx.measureText(tail).width;ctx.fillStyle='#111';if(p+pw+18+tw<950){ctx.fillText(tail,p+pw+18,y);y+=116}else{y+=116;ctx.fillText('fatto è meglio di',p,y);y+=116}ctx.fillText('100% immaginato.',p,y);ctx.fillStyle='#6b6b67';ctx.font='500 24px Inter, Arial, sans-serif';ctx.fillText('www.the6amreview.com',p,980)}
+    function downloadImage(){drawPoster();const link=document.createElement('a');link.download=`the-6am-review-${input.value}-percent.png`;link.href=canvas.toDataURL('image/png');link.click()}
+    input.addEventListener('input',e=>update(e.target.value));range.addEventListener('input',e=>update(e.target.value));downloadBtn.addEventListener('click',downloadImage);resetBtn.addEventListener('click',()=>update(80));update(80);
   </script>
 </body>
 </html>
