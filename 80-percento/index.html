@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f2f0e9" />
+  <title>80% fatto è meglio di 100% immaginato.</title>
+  <style>
+    :root{
+      --bg:#f2f0e9;
+      --text:#111111;
+      --muted:#6b6b67;
+      --accent:#ff6b2c;
+      --card:rgba(255,255,255,.72);
+      --line:rgba(17,17,17,.10);
+      --shadow:0 20px 60px rgba(20,20,20,.08);
+    }
+
+    *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;background:var(--bg)}
+    html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden}
+
+    body{
+      min-height:100svh;
+      color:var(--text);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 78% 8%, rgba(255,107,44,.11), transparent 30rem),
+        radial-gradient(circle at 10% 90%, rgba(17,17,17,.05), transparent 24rem),
+        var(--bg);
+      padding:
+        max(12px, env(safe-area-inset-top))
+        max(12px, env(safe-area-inset-right))
+        max(12px, env(safe-area-inset-bottom))
+        max(12px, env(safe-area-inset-left));
+    }
+
+    .shell{
+      width:min(1500px,100%);
+      min-height:calc(100svh - 24px);
+      margin:0 auto;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:rgba(255,255,255,.32);
+      -webkit-backdrop-filter:blur(12px);
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    header,footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:22px 26px;
+      min-width:0;
+    }
+
+    .eyebrow{
+      font-size:12px;
+      line-height:1;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      flex:0 0 auto;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:10px 14px;
+      background:rgba(255,255,255,.55);
+    }
+
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 0 5px rgba(255,107,44,.12);
+    }
+
+    main{
+      min-width:0;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(250px,300px);
+      gap:30px;
+      align-items:end;
+      padding:30px 26px 28px;
+    }
+
+    .statement{
+      min-width:0;
+      margin:0;
+      max-width:1080px;
+      font-size:clamp(3.7rem,9.5vw,9.5rem);
+      line-height:.86;
+      letter-spacing:-.064em;
+      font-weight:850;
+      text-wrap:balance;
+      overflow-wrap:normal;
+      word-break:normal;
+    }
+
+    .editable{color:var(--accent);white-space:nowrap}
+
+    .panel{
+      min-width:0;
+      align-self:end;
+      padding:20px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:var(--card);
+      box-shadow:0 14px 40px rgba(0,0,0,.05);
+    }
+
+    .panel label{
+      display:block;
+      margin-bottom:10px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+
+    .control-row{display:flex;align-items:center;gap:10px;min-width:0}
+
+    input[type="number"]{
+      width:104px;
+      max-width:100%;
+      border:none;
+      outline:none;
+      padding:13px;
+      border-radius:15px;
+      background:#111;
+      color:#fff;
+      font:inherit;
+      font-size:27px;
+      font-weight:800;
+      appearance:textfield;
+    }
+
+    input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .percent-mark{font-size:27px;font-weight:800}
+    .range-wrap{margin-top:16px}
+    input[type="range"]{width:100%;max-width:100%;accent-color:var(--accent);cursor:pointer}
+    .hint{margin-top:12px;font-size:12px;line-height:1.45;color:var(--muted)}
+
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .signature{font-weight:700;color:var(--text)}
+
+    @media (max-width:900px){
+      .shell{border-radius:24px}
+      header,footer{padding:18px 18px}
+      main{
+        grid-template-columns:minmax(0,1fr);
+        align-content:space-between;
+        align-items:start;
+        gap:28px;
+        padding:24px 18px 22px;
+      }
+      .statement{
+        max-width:100%;
+        font-size:clamp(3.2rem,14vw,6.8rem);
+        line-height:.88;
+        letter-spacing:-.06em;
+      }
+      .panel{width:100%;max-width:420px}
+    }
+
+    @media (max-width:480px){
+      body{
+        padding:
+          max(8px,env(safe-area-inset-top))
+          max(8px,env(safe-area-inset-right))
+          max(8px,env(safe-area-inset-bottom))
+          max(8px,env(safe-area-inset-left));
+      }
+      .shell{
+        min-height:calc(100svh - 16px);
+        border-radius:20px;
+      }
+      header{
+        padding:15px 14px 10px;
+      }
+      .badge{padding:8px 10px;font-size:10px}
+      .eyebrow{font-size:10px;letter-spacing:.15em}
+      main{
+        gap:22px;
+        padding:16px 14px 18px;
+      }
+      .statement{
+        font-size:clamp(2.85rem,13.2vw,4.25rem);
+        line-height:.9;
+        letter-spacing:-.057em;
+        text-wrap:pretty;
+      }
+      .panel{
+        padding:16px;
+        border-radius:18px;
+      }
+      input[type="number"]{
+        width:92px;
+        font-size:24px;
+        padding:11px 12px;
+      }
+      .percent-mark{font-size:24px}
+      footer{
+        padding:13px 14px;
+        font-size:10px;
+      }
+    }
+
+    @media (max-width:380px){
+      .statement{font-size:clamp(2.55rem,12.8vw,3.45rem)}
+      .badge{display:none}
+      footer span:first-child{display:none}
+    }
+  </style>
+</head>
+<body>
+  <section class="shell">
+    <header>
+      <div class="eyebrow">Principio guida</div>
+      <div class="badge"><span class="dot"></span> Personalizzabile</div>
+    </header>
+
+    <main>
+      <h1 class="statement">
+        <span class="editable"><span id="headlineValue">80</span>%</span>
+        fatto è meglio di 100% immaginato.
+      </h1>
+
+      <aside class="panel">
+        <label for="percentInput">Prima percentuale</label>
+        <div class="control-row">
+          <input id="percentInput" type="number" min="1" max="100" value="80" inputmode="numeric" />
+          <span class="percent-mark">%</span>
+        </div>
+        <div class="range-wrap">
+          <input id="percentRange" type="range" min="1" max="100" value="80" />
+        </div>
+        <div class="hint">Cambia il numero e la frase si aggiorna in tempo reale.</div>
+      </aside>
+    </main>
+
+    <footer>
+      <span>Done beats imagined perfection.</span>
+      <span class="signature">The 6am Review</span>
+    </footer>
+  </section>
+
+  <script>
+    const input=document.getElementById('percentInput');
+    const range=document.getElementById('percentRange');
+    const headline=document.getElementById('headlineValue');
+
+    function update(value){
+      let v=Number(value);
+      if(Number.isNaN(v)) v=80;
+      v=Math.min(100,Math.max(1,v));
+      input.value=v;
+      range.value=v;
+      headline.textContent=v;
+      document.title=`${v}% fatto è meglio di 100% immaginato.`;
+    }
+
+    input.addEventListener('input',e=>update(e.target.value));
+    range.addEventListener('input',e=>update(e.target.value));
+  </script>
+</body>
+</html>
