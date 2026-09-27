@@ -59,13 +59,13 @@
       min-width:0;
     }
 
-    .eyebrow{
+    .brand{
       font-size:12px;
       line-height:1;
       letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--muted);
-      font-weight:700;
+      text-transform:none;
+      color:var(--text);
+      font-weight:800;
     }
 
     .badge{
@@ -89,6 +89,7 @@
 
     main{
       min-width:0;
+      padding-top:72px;
       display:grid;
       grid-template-columns:minmax(0,1fr) minmax(250px,300px);
       gap:30px;
@@ -166,6 +167,7 @@
       header,footer{padding:18px 18px}
       main{
         grid-template-columns:minmax(0,1fr);
+        padding-top:56px;
         align-content:space-between;
         align-items:start;
         gap:28px;
@@ -196,7 +198,7 @@
         padding:15px 14px 10px;
       }
       .badge{padding:8px 10px;font-size:10px}
-      .eyebrow{font-size:10px;letter-spacing:.15em}
+      .brand{font-size:14px;letter-spacing:-.01em}
       main{
         gap:22px;
         padding:16px 14px 18px;
@@ -217,10 +219,7 @@
         padding:11px 12px;
       }
       .percent-mark{font-size:24px}
-      footer{
-        padding:13px 14px;
-        font-size:10px;
-      }
+      footer{display:none;}
     }
 
     @media (max-width:380px){
@@ -233,7 +232,7 @@
 <body>
   <section class="shell">
     <header>
-      <div class="eyebrow">Principio guida</div>
+      <div class="brand">The 6am Review</div>
       <div class="badge"><span class="dot"></span> Personalizzabile</div>
     </header>
 
@@ -257,8 +256,7 @@
     </main>
 
     <footer>
-      <span>Done beats imagined perfection.</span>
-      <span class="signature">The 6am Review</span>
+      <span></span>
     </footer>
   </section>
 
