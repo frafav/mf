@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f2f0e9" />
   <title>80% fatto è meglio di 100% immaginato.</title>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
   <style>
     :root{--bg:#f2f0e9;--text:#111111;--muted:#6b6b67;--accent:#ff6b2c;--card:rgba(255,255,255,.72);--line:rgba(17,17,17,.10);--shadow:0 20px 60px rgba(20,20,20,.08)}
     *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;background:var(--bg)}html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden}
@@ -31,7 +32,7 @@
           <div class="control-row"><input id="percentInput" type="number" min="1" max="100" value="80" inputmode="numeric" /><span class="percent-mark">%</span></div>
           <input id="percentRange" type="range" min="1" max="100" value="80" />
           <div class="actions"><button class="primary" id="downloadBtn">Scarica immagine quadrata</button><button class="secondary" id="resetBtn" type="button">Reset 80%</button></div>
-          <p class="hint">La frase si aggiorna in tempo reale. Il download genera un PNG quadrato con il logo <strong>The 6am Review</strong> visibile.</p>
+          <p class="hint">Il download esporta direttamente l’anteprima quadrata visibile, così PNG e preview risultano coerenti.</p>
         </div>
       </section>
       <aside class="right">
@@ -46,13 +47,21 @@
       </aside>
     </main>
   </section>
-  <canvas id="exportCanvas" width="1080" height="1080"></canvas>
+  
   <script>
     const input=document.getElementById('percentInput'),range=document.getElementById('percentRange'),headline=document.getElementById('headlineValue'),posterValue=document.getElementById('posterValue'),downloadBtn=document.getElementById('downloadBtn'),resetBtn=document.getElementById('resetBtn'),canvas=document.getElementById('exportCanvas'),ctx=canvas.getContext('2d');
     function update(value){let v=Number(value);if(Number.isNaN(v))v=80;v=Math.min(100,Math.max(1,v));input.value=v;range.value=v;headline.textContent=v;posterValue.textContent=v;document.title=`${v}% fatto è meglio di 100% immaginato.`}
-    function drawBackground(){ctx.fillStyle='#f2f0e9';ctx.fillRect(0,0,1080,1080);const g1=ctx.createRadialGradient(860,120,0,860,120,320);g1.addColorStop(0,'rgba(255,107,44,0.11)');g1.addColorStop(1,'rgba(255,107,44,0)');ctx.fillStyle=g1;ctx.fillRect(0,0,1080,1080);const g2=ctx.createRadialGradient(180,900,0,180,900,280);g2.addColorStop(0,'rgba(17,17,17,0.05)');g2.addColorStop(1,'rgba(17,17,17,0)');ctx.fillStyle=g2;ctx.fillRect(0,0,1080,1080)}
-    function drawPoster(){drawBackground();const p=92;let y=120;ctx.textBaseline='top';ctx.fillStyle='#111';ctx.font='800 30px Inter, Arial, sans-serif';ctx.fillText('The 6am Review',p,y);y+=150;ctx.font='850 106px Inter, Arial, sans-serif';const pct=`${input.value}%`;ctx.fillStyle='#ff6b2c';ctx.fillText(pct,p,y);const pw=ctx.measureText(pct).width,tail=' fatto è meglio di',tw=ctx.measureText(tail).width;ctx.fillStyle='#111';if(p+pw+18+tw<950){ctx.fillText(tail,p+pw+18,y);y+=116}else{y+=116;ctx.fillText('fatto è meglio di',p,y);y+=116}ctx.fillText('100% immaginato.',p,y);ctx.fillStyle='#6b6b67';ctx.font='500 24px Inter, Arial, sans-serif';ctx.fillText('www.the6amreview.com',p,980)}
-    function downloadImage(){drawPoster();const link=document.createElement('a');link.download=`the-6am-review-${input.value}-percent.png`;link.href=canvas.toDataURL('image/png');link.click()}
+    async function downloadImage(){
+      const dataUrl = await htmlToImage.toPng(posterPreview, {
+        cacheBust: true,
+        pixelRatio: 3,
+        backgroundColor: '#f2f0e9'
+      });
+      const link = document.createElement('a');
+      link.download = 'the-6am-review-' + input.value + '-percent.png';
+      link.href = dataUrl;
+      link.click();
+    }
     input.addEventListener('input',e=>update(e.target.value));range.addEventListener('input',e=>update(e.target.value));downloadBtn.addEventListener('click',downloadImage);resetBtn.addEventListener('click',()=>update(80));update(80);
   </script>
 </body>
